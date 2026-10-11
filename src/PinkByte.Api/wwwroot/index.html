@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pink Byte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1 class="logo">Pink<span>Byte</span></h1>
+    <p class="lema">Ciudad Obsidiana · donde los bugs muerden</p>
+  </header>
+
+  <main>
+    <!-- PANTALLA 1: Crear personaje -->
+    <section id="pantalla-creacion" class="pantalla" hidden>
+      <div class="tarjeta creacion">
+        <div class="avatar-preview" id="avatar-preview" aria-hidden="true"></div>
+
+        <form id="form-creacion" class="formulario">
+          <h2>Crea a tu programadora</h2>
+
+          <label class="campo">
+            <span>Nombre</span>
+            <input name="nombre" required maxlength="20" placeholder="Ej: Nyx Rosé" autocomplete="off">
+          </label>
+
+          <fieldset class="campo">
+            <legend>Estilo</legend>
+            <div class="estilos">
+              <label class="estilo"><input type="radio" name="estilo" value="Gotica" checked>
+                <span><b>🦇 Gótica</b><small>+3 Defensa</small></span></label>
+              <label class="estilo"><input type="radio" name="estilo" value="Punk">
+                <span><b>🎸 Punk</b><small>+4 Ataque</small></span></label>
+              <label class="estilo"><input type="radio" name="estilo" value="Kawaii">
+                <span><b>🎀 Kawaii</b><small>+25 Vida</small></span></label>
+            </div>
+          </fieldset>
+
+          <label class="campo campo-color">
+            <span>Color de pelo</span>
+            <input type="color" name="colorPelo" value="#ff4fa3">
+          </label>
+
+          <button class="boton boton-principal" type="submit">Entrar a la ciudad</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: Mapa de villanos -->
+    <section id="pantalla-mapa" class="pantalla" hidden>
+      <div class="mapa">
+        <aside class="tarjeta ficha" id="ficha"></aside>
+        <div>
+          <h2 class="titulo-seccion">El camino a la gran empresa</h2>
+          <ol class="villanos" id="lista-villanos"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: Combate -->
+    <section id="pantalla-combate" class="pantalla" hidden>
+      <div class="arena">
+        <div class="luchadora tarjeta" id="lado-protagonista"></div>
+        <div class="vs">VS</div>
+        <div class="luchadora tarjeta villano" id="lado-villano"></div>
+      </div>
+      <div class="acciones" id="acciones"></div>
+      <ol class="registro tarjeta" id="registro" aria-live="polite"></ol>
+    </section>
+  </main>
+
+  <div class="aviso" id="aviso" role="alert" hidden></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

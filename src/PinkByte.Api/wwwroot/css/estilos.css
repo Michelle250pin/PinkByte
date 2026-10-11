@@ -1,0 +1,187 @@
+/* =========================================================
+   PINK BYTE · Hoja de estilos
+   UX tip: todo color/tamaño vive en variables (design tokens).
+   Si cambias un token, cambia todo el juego de forma coherente.
+   ========================================================= */
+:root {
+  --fondo: #120910;
+  --fondo-2: #1f0f1b;
+  --superficie: #2a1424;
+  --borde: #4a2240;
+  --rosa: #ff4fa3;
+  --rosa-suave: #ffb8da;
+  --morado: #9b5cff;
+  --texto: #f7e8f1;
+  --texto-tenue: #b892a8;
+  --peligro: #ff5c5c;
+  --exito: #6bf0b5;
+  --cafe: #e0a46b;
+
+  --radio: 14px;
+  --sombra-neon: 0 0 0 1px var(--borde), 0 0 24px -6px rgb(255 79 163 / .45);
+  --fuente-titulo: "Pirata One", serif;
+  --fuente: "Space Grotesk", system-ui, sans-serif;
+  --fuente-codigo: "JetBrains Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--fuente);
+  color: var(--texto);
+  background:
+    radial-gradient(ellipse at top, rgb(255 79 163 / .18), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgb(155 92 255 / .15), transparent 50%),
+    var(--fondo);
+  background-attachment: fixed;
+}
+
+/* Contenedor central: MOBILE-FIRST → 16px de margen lateral en celular */
+main { max-width: 1040px; margin: 0 auto; padding: 0 16px 48px; }
+
+h2 { margin: 0 0 16px; font-size: 1.25rem; }
+
+/* ---------- Cabecera ---------- */
+.cabecera { text-align: center; padding: 28px 16px 20px; }
+.logo {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 4.2rem);   /* clamp = tamaño fluido entre un mínimo y un máximo */
+  letter-spacing: 1px;
+  text-shadow: 0 0 18px rgb(255 79 163 / .7);
+}
+.logo span { color: var(--rosa); }
+.lema { margin: 4px 0 0; color: var(--texto-tenue); font-size: .9rem; }
+
+/* ---------- Componentes base ---------- */
+.tarjeta {
+  background: linear-gradient(160deg, var(--superficie), var(--fondo-2));
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-neon);
+  padding: 20px;
+}
+
+.boton {
+  font: 600 1rem var(--fuente);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 12px 20px;
+  min-height: 44px;                  /* UX: 44px = tamaño mínimo cómodo para el dedo */
+  color: var(--texto);
+  background: var(--superficie);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.boton:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px -8px var(--rosa); }
+.boton:focus-visible, input:focus-visible { outline: 2px solid var(--rosa-suave); outline-offset: 2px; }
+.boton:disabled { opacity: .4; cursor: not-allowed; }
+.boton-principal { background: var(--rosa); border-color: var(--rosa); color: #1a0613; }
+
+/* ---------- Pantalla de creación ---------- */
+.creacion { display: grid; gap: 24px; max-width: 760px; margin: 0 auto; }
+.formulario { display: grid; gap: 18px; }
+.campo { display: grid; gap: 6px; border: 0; padding: 0; margin: 0; }
+.campo > span, .campo legend { font-weight: 600; font-size: .9rem; color: var(--rosa-suave); padding: 0; margin-bottom: 6px; }
+.campo input[name="nombre"] {
+  font: 1rem var(--fuente); color: var(--texto);
+  background: var(--fondo); border: 1px solid var(--borde); border-radius: 10px;
+  padding: 12px 14px; min-height: 44px;
+}
+.campo-color { grid-template-columns: 1fr auto; align-items: center; }
+.campo-color input { width: 56px; height: 40px; border: 0; background: none; cursor: pointer; }
+
+.estilos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.estilo input { position: absolute; opacity: 0; }   /* escondido visualmente, pero accesible */
+.estilo span {
+  display: grid; gap: 2px; text-align: center; cursor: pointer;
+  padding: 12px 6px; border-radius: 10px; border: 1px solid var(--borde); background: var(--fondo);
+  transition: border-color .15s, background .15s;
+}
+.estilo small { color: var(--texto-tenue); font-size: .75rem; }
+.estilo input:checked + span { border-color: var(--rosa); background: rgb(255 79 163 / .12); }
+.estilo input:focus-visible + span { outline: 2px solid var(--rosa-suave); }
+
+.avatar-preview, .avatar { display: grid; place-items: center; }
+.avatar-preview svg { width: 160px; height: 160px; filter: drop-shadow(0 0 20px rgb(255 79 163 / .4)); }
+
+/* ---------- Mapa ---------- */
+.mapa { display: grid; gap: 24px; }
+.titulo-seccion { font-family: var(--fuente-titulo); font-weight: 400; font-size: 1.8rem; color: var(--rosa-suave); }
+
+.ficha { display: grid; gap: 12px; align-content: start; }
+.ficha .avatar svg { width: 96px; height: 96px; }
+.ficha h2 { margin: 0; text-align: center; }
+.ficha .descripcion { margin: 0; color: var(--texto-tenue); font-size: .9rem; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0; }
+.stats div { background: var(--fondo); border-radius: 10px; padding: 8px 10px; }
+.stats dt { font-size: .75rem; color: var(--texto-tenue); }
+.stats dd { margin: 0; font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.chips li { font: .8rem var(--fuente-codigo); background: rgb(155 92 255 / .2); border: 1px solid var(--morado); border-radius: 999px; padding: 4px 10px; }
+
+.villanos { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: paso; }
+.villano-item { display: grid; gap: 10px; position: relative; }
+.villano-item h3 { margin: 0; font-size: 1.1rem; }
+.villano-item h3::before { counter-increment: paso; content: "Nivel " counter(paso) " · "; color: var(--rosa); font-size: .8rem; }
+.villano-item p { margin: 0; color: var(--texto-tenue); font-size: .9rem; }
+.villano-item .frase { font-style: italic; color: var(--rosa-suave); }
+.villano-item.bloqueado { opacity: .45; }
+.villano-item.vencido { box-shadow: 0 0 0 1px var(--exito); }
+.recompensa { font: .8rem var(--fuente-codigo); color: var(--exito); }
+
+/* ---------- Combate ---------- */
+.arena { display: grid; gap: 12px; align-items: center; }
+.vs { text-align: center; font-family: var(--fuente-titulo); font-size: 2rem; color: var(--rosa); text-shadow: 0 0 12px var(--rosa); }
+.luchadora { display: grid; gap: 10px; }
+.luchadora header { display: flex; align-items: center; gap: 12px; }
+.luchadora header svg { width: 56px; height: 56px; flex-shrink: 0; }
+.luchadora .emoji-villano { font-size: 2.6rem; line-height: 1; }
+.luchadora h3 { margin: 0; }
+.luchadora small { color: var(--texto-tenue); }
+.villano { box-shadow: 0 0 0 1px var(--borde), 0 0 24px -6px rgb(155 92 255 / .55); }
+
+.barra { display: grid; gap: 4px; font-size: .8rem; }
+.barra-fondo { height: 10px; background: var(--fondo); border-radius: 999px; overflow: hidden; }
+.barra-relleno { height: 100%; border-radius: inherit; transition: width .4s ease; }
+.barra.vida .barra-relleno { background: linear-gradient(90deg, var(--peligro), var(--rosa)); }
+.barra.cafe .barra-relleno { background: var(--cafe); }
+
+.acciones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 16px 0; }
+.accion { display: grid; gap: 2px; border-radius: 12px; text-align: left; }
+.accion small { font-weight: 400; color: var(--texto-tenue); font-size: .75rem; }
+
+.registro {
+  list-style: none; margin: 0; max-height: 280px; overflow-y: auto;
+  font: .85rem/1.6 var(--fuente-codigo); display: flex; flex-direction: column-reverse;
+}
+.registro li.separador { color: var(--texto-tenue); }
+
+/* ---------- Aviso (toast) ---------- */
+.aviso {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; margin: 0 auto; max-width: 480px;
+  background: var(--peligro); color: #1a0613; font-weight: 600;
+  padding: 14px 18px; border-radius: 12px; box-shadow: 0 10px 30px rgb(0 0 0 / .5);
+}
+
+/* =========================================================
+   RESPONSIVO: a partir de 720px (tablet / compu) se reacomoda.
+   Mobile-first = los estilos de arriba son para celular,
+   y aquí solo AGREGAMOS lo que cambia en pantallas grandes.
+   ========================================================= */
+@media (min-width: 720px) {
+  .creacion { grid-template-columns: 220px 1fr; align-items: center; padding: 32px; }
+  .avatar-preview svg { width: 200px; height: 200px; }
+  .mapa { grid-template-columns: 300px 1fr; align-items: start; }
+  .ficha { position: sticky; top: 16px; }
+  .villano-item { grid-template-columns: 1fr auto; align-items: center; }
+  .arena { grid-template-columns: 1fr auto 1fr; }
+  .acciones { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+}
+
+/* UX + accesibilidad: respeta a quien pide menos animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
